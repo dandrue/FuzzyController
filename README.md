@@ -9,3 +9,5 @@ For the inputs Temperature and pressure, there are 5 membership functions define
 The Fuzzy controller is estructured into two files, FuncionesPertenencia.py contains all the functions needed for the implementation, on ControlFuzzyTurbina.py an especific implementation for a turbine control is defined.
 
 
+
+![Fuzzy Controller](images/Figure_1.png)

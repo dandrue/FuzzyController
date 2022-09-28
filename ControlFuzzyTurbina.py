@@ -5,12 +5,14 @@ Created on Thu Mar 11 00:43:30 2021
 
 @author: diego
 """
-# Se importan librerías 
+# Se importan librerías
 # import numpy as np
 import matplotlib.pyplot as plt
 from FuncionesPertenencia import TrapAbiertaIzquierda, TrapAbiertaDerecha, \
     Triangular, Trapezoidal, Intersecciones, Conorma
 from copy import deepcopy
+import seaborn as sns
+sns.set_theme()
 
 # Se establecen las etiquetas de los conjuntos difusos para Temperatura y Presión y se agrupan en dos diccionarios
 Temp = {'name': 'Temperatura', 'labels': ["Fria", "Fresca", "Normal", "Tibia", "Caliente"]}
@@ -30,9 +32,9 @@ for i in Temperatura:
     axs[0, 0].plot(i.x, i.y)
 axs[0, 0].set_ylim([0, 1.02])
 axs[0, 0].grid(True)
-axs[0, 0].set_title("Temperatura")
-axs[0, 0].set_xlabel("Temperatura")
-axs[0, 0].set_ylabel('Pertenencia')
+axs[0, 0].set_title("Temperature")
+axs[0, 0].set_xlabel("Temperature")
+axs[0, 0].set_ylabel('Membership')
 
 # Se definen las funciones de pertenencia de los conjuntos difusos para la presión
 PreEscasa = TrapAbiertaIzquierda(Pres['labels'][0], Pres['name'], [10, 50, 90])
@@ -48,9 +50,9 @@ for i in Presion:
     axs[0, 1].plot(i.x, i.y)
 axs[0, 1].grid(True)
 axs[0, 1].set_ylim([0, 1.02])
-axs[0, 1].set_title("Presión")
-axs[0, 1].set_xlabel("Presión")
-axs[0, 1].set_ylabel('Pertenencia')
+axs[0, 1].set_title("Preassure")
+axs[0, 1].set_xlabel("Preassure")
+axs[0, 1].set_ylabel('Membership')
 
 # Se Realizan las entradas del sistema con valores discretos
 TempValue = 150
@@ -70,10 +72,10 @@ ActPre = []
 
 for i in Temperatura:
     ActTemp.append(i.eval(TempValue))
-    
+
 for i in Presion:
     ActPre.append(i.eval(PreValue))
-    
+
 # Se generan diccionarios que relacionan las etiquetas de los conjuntos difusos con los valores de activación
 
 DicTemp = dict(zip(Temp['labels'], ActTemp))
@@ -121,7 +123,7 @@ for i in DicVal.keys():
 print("DictValIntersec\n \n", DicValIntersec, "\n")
 # Se definen las etiquetas para las funciones de salida
 Accion = {'name': 'action', 'labels': ["NG", "NM", "NP", "CE", "PP", "PM", "PG"]}
-        
+
 # Se definen las funciones de salida
 AccNG = TrapAbiertaIzquierda(Accion['labels'][0], Accion['name'], [-60, -40, -20])
 AccNM = Triangular(Accion['labels'][1], Accion['name'], [-40, -20, -10])
@@ -178,7 +180,7 @@ AccionConorma = deepcopy(AccionDict)
 for i in AccionConorma.keys():
     value = Conorma.max(AccionConorma[i])
     AccionConorma[i] = value
-    
+
 # El diccionario AccionConorma contiene el valor de corte para cada uno de los conjuntos difusos a la salida
 print("AccionConorma\n \n", AccionConorma, "\n")
 
@@ -202,7 +204,7 @@ if Tipo == "Escalado":
             Base = DictAccSal[i]
             AccionDict[i] = Triangular('TriangularTruncada', Base.var, [Base.inicio, Base.medio, Base.fin],
                                        AccionConorma[i])
-             
+
 elif Tipo == "Truncado":
     for i in AccionConorma.keys():
         if DictAccSal[i].type == "TrapAbiertaIzquierda":
@@ -234,10 +236,10 @@ for i in AccionDict.keys():
 axs[1, 1].set_xlim([-60, 60])
 axs[1, 1].set_ylim([0, 1.02])
 axs[1, 1].grid(True)
-axs[1, 1].set_xlabel('Pertenencia')
-axs[1, 1].set_ylabel('Accionamiento')
-axs[1, 1].set_title('Accionamiento del Inyector (Salida) [cm/s]')
-fig.suptitle('FUNCIONES DE PERTENENCIA')
+axs[1, 1].set_xlabel('Membership')
+axs[1, 1].set_ylabel('Displacement')
+axs[1, 1].set_title('Injector Displacement (Output) [cm/s]')
+fig.suptitle('MEMBERSHIP FUNCTIONS')
 plt.show()
 
 Areas = []
@@ -252,7 +254,7 @@ for i in AccionDict.keys():
         centroide2 = Base.inicio + (1/2)*(Base.medio - Base.inicio)
         Areas.extend([area1, area2])
         Centroides.extend([centroide1, centroide2])
-        
+
     elif AccionDict[i].type == "TrapAbiertaDerecha":
         Base = AccionDict[i]
         area1 = 1/2*((Base.medio - Base.inicio)*Base.altura)
@@ -261,7 +263,7 @@ for i in AccionDict.keys():
         centroide2 = Base.medio + (1/2)*(Base.fin - Base.medio)
         Areas.extend([area1, area2])
         Centroides.extend([centroide1, centroide2])
-    
+
     elif AccionDict[i].type == "Trapezoidal" or AccionDict[i].type == "Tringular":
         Base = AccionDict[i]
         area1 = 1/2*((Base.medio1 - Base.inicio)*Base.altura)

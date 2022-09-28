@@ -10,15 +10,20 @@ import statistics
 
 
 class TrapAbiertaIzquierda:
-    """
-    Clase para generar una función de pertenencia Trapezoidal Abierta a la Izquierda, requiere de los siguientes
+    """Clase para generar una función de pertenencia Trapezoidal Abierta a la Izquierda, requiere de los siguientes
     parámetros:
             nombre: El nombre de la función
             inicio: Valor de inicio
             medio: Valor medio de la función, donde termina la sección horizontal e inicia la pendiente
             fin: Valor de fin de la función
             altura: altura de la función
-            
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
     """
     
     def __init__(self, nombre, var, param, altura=1):
@@ -33,6 +38,7 @@ class TrapAbiertaIzquierda:
         self.x, self.y = self.update()
 
     def update(self):
+        """ """
         self.inicio = self.param[0]
         self.medio = self.param[1]
         self.fin = self.param[2]
@@ -55,6 +61,17 @@ class TrapAbiertaIzquierda:
         return self.x, self.y
         
     def eval(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         medio = self.medio
         fin = self.fin
         inicio = self.inicio
@@ -73,6 +90,17 @@ class TrapAbiertaIzquierda:
         return pertenencia
     
     def evalx(self, pertenencia):
+        """
+
+        Parameters
+        ----------
+        pertenencia :
+            
+
+        Returns
+        -------
+
+        """
         medio = self.medio
         fin = self.fin
         altura = self.altura
@@ -83,6 +111,7 @@ class TrapAbiertaIzquierda:
         
         
 class TrapAbiertaDerecha:
+    """ """
     def __init__(self, nombre, var, param, altura=1):
         self.nombre = nombre
         self.var = var
@@ -95,6 +124,7 @@ class TrapAbiertaDerecha:
         self.x, self.y = self.update()
 
     def update(self):
+        """ """
         self.inicio = self.param[0]
         self.medio = self.param[1]
         self.fin = self.param[2]
@@ -117,6 +147,17 @@ class TrapAbiertaDerecha:
         return self.x, self.y
         
     def eval(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         medio = self.medio
         fin = self.fin
         inicio = self.inicio
@@ -135,6 +176,17 @@ class TrapAbiertaDerecha:
         return pertenencia
     
     def evalx(self, pertenencia):
+        """
+
+        Parameters
+        ----------
+        pertenencia :
+            
+
+        Returns
+        -------
+
+        """
         medio = self.medio
         inicio = self.inicio
         altura = self.altura
@@ -145,6 +197,7 @@ class TrapAbiertaDerecha:
 
 
 class Trapezoidal:
+    """ """
     def __init__(self, nombre, var, param, altura=1):
         self.nombre = nombre
         self.var = var
@@ -158,6 +211,7 @@ class Trapezoidal:
         self.x, self.y = self.update()
 
     def update(self):
+        """ """
         self.inicio = self.param[0]
         self.medio1 = self.param[1]
         self.medio2 = self.param[2]
@@ -182,6 +236,17 @@ class Trapezoidal:
         return self.x, self.y
         
     def eval(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         medio1 = self.medio1
         medio2 = self.medio2
         fin = self.fin
@@ -204,6 +269,17 @@ class Trapezoidal:
         return pertenencia
     
     def evalx(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         inicio = self.inicio
         medio1 = self.medio1
         medio2 = self.medio2
@@ -217,6 +293,7 @@ class Trapezoidal:
 
 
 class Triangular:
+    """ """
     def __init__(self, nombre, var, param, altura=1):
         self.nombre = nombre
         self.var = var
@@ -229,6 +306,7 @@ class Triangular:
         self.x, self.y = self.update()
 
     def update(self):
+        """ """
         self.inicio = self.param[0]
         self.medio = self.param[1]
         self.fin = self.param[2]
@@ -251,6 +329,17 @@ class Triangular:
         return self.x, self.y
         
     def eval(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         medio = self.medio
         fin = self.fin
         inicio = self.inicio
@@ -270,6 +359,17 @@ class Triangular:
         return pertenencia
     
     def evalx(self, entry):
+        """
+
+        Parameters
+        ----------
+        entry :
+            
+
+        Returns
+        -------
+
+        """
         inicio = self.inicio
         medio = self.medio
         fin = self.fin
@@ -282,18 +382,52 @@ class Triangular:
 
 
 class Intersecciones:
+    """ """
     @staticmethod
     def zadeh(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         interseccion = min(lista)
         return interseccion
 
     @staticmethod
     def mean(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         interseccion = statistics.mean(lista)
         return interseccion
 
     @staticmethod
     def larsen(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         interseccion = 1
         for i in lista:
             interseccion = interseccion * i
@@ -301,18 +435,52 @@ class Intersecciones:
 
     @staticmethod
     def binary(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         interseccion = max(1-lista[0], lista[1])
         return interseccion
 
 
 class Conorma:
+    """ """
     @staticmethod
     def max(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         value = max(lista)
         return value
 
     @staticmethod
     def sum(lista):
+        """
+
+        Parameters
+        ----------
+        lista :
+            
+
+        Returns
+        -------
+
+        """
         value = sum(lista)
         if value > 1:
             value = 1
